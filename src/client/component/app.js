@@ -1,8 +1,8 @@
 import React from 'react';
-import Sample from './sample';
+import JsonLoader from './jsonLoader';
 
 export default class App extends React.Component {
   render() {
-    return <div><Sample /></div>
+    return <JsonLoader />
   }
 }
