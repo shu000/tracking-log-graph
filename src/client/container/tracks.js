@@ -7,8 +7,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
-  return { };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tracks);
+export default connect(mapStateToProps)(Tracks);
