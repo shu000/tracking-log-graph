@@ -1,10 +1,16 @@
+import actionType from './actionType';
+
 const initialState = {
-  sample: 1
+  json: {},
+  template: {}
 };
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
-    case 'Q':
+    case actionType.ON_DROP:
+      return Object.assign({}, state, {
+        json: action.payLoad.json
+      });
     default:
       return state;
   }

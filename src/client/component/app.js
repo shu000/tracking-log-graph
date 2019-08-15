@@ -1,8 +1,14 @@
 import React from 'react';
-import JsonLoader from './jsonLoader';
+import JsonLoader from '../container/jsonLoader';
+import Tracks from '../container/tracks';
 
 export default class App extends React.Component {
   render() {
-    return <JsonLoader />
+    return (
+      <div id='app'>
+        <JsonLoader />
+        <Tracks />
+      </div>
+    );
   }
 }
