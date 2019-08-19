@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  tracking:
+    image: node:10.16.0
+    container_name: app
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/tracking-log-graph
+    tty: true
+    command: /bin/bash
+
+  mongo:
+    image: mongo:4.0.12
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 27017:27017
+    volumes:
+      - ../strage/db:/data/db
+      - ../strage/configdb:/data/configdb
