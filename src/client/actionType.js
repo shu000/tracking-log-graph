@@ -1,3 +1,4 @@
 export default {
-  ON_DROP: 'ON_DROP'
+  ON_DROP: 'ON_DROP',
+  ON_SELECT_CUSTOMER: 'ON_SELECT_CUSTOMER'
 }
