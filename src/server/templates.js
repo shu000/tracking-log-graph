@@ -24,7 +24,12 @@ const Templates = {
       // Find collection `customers`
       const result = await db.collection('customers').find().toArray();
 
-      return JSON.stringify(result);
+      if (result.length === 0) {
+        // TODO
+        return '{ "error": "Failed to connect MongoDB" }';
+      }
+
+      return JSON.stringify(result[0]);
     } catch (err) {
       console.log(err.stack);
       return '{ "error": "Failed to connect MongoDB" }';

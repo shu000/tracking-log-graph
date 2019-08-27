@@ -1,6 +1,7 @@
 import actionType from './actionType';
 
 const initialState = {
+  data: {}, // TODO
   sessions: [],
   customers: [],
   template: {
@@ -18,6 +19,11 @@ export default function reducer(state = initialState, action) {
     case actionType.ON_DROP:
       return Object.assign({}, state, {
         sessions: json2sessions(action.payLoad.json)
+      });
+    case actionType.RECEIVE_TEMPLATE:
+      console.log(action);
+      return Object.assign({}, state, {
+        template: action.payLoad.template
       });
     default:
       return state;
