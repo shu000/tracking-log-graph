@@ -25,7 +25,16 @@ export function fetchTemplate() {
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL)
+    return fetch(URL, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: '初期設定'
+        })
+      })
       .then(
         response => response.json(),
         error => console.log(error)
