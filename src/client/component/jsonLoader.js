@@ -7,6 +7,8 @@ import React from 'react';
  */
 export default class JsonLoader extends React.Component {
   render() {
+    if (this.props.sessions.length > 0) return <></>
+
     return <div
       id="droparea"
       onDragEnter={ cancelEvent }

@@ -25,11 +25,20 @@ html, body, #root {
   height: 100%;
   width: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+#templates {
+  width: 30%;
 }
 
 #droparea {
-  height: 50%;
-  width: 100%;
+  width: 70%;
   border: 1px dashed #333;
   background-color: #EEE;
+}
+
+#tracks {
+  width: 70%;
 }

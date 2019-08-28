@@ -1,7 +1,6 @@
 import actionType from './actionType';
 
 const initialState = {
-  data: {}, // TODO
   sessions: [],
   customers: [],
   template: {

@@ -2,9 +2,14 @@ import React from 'react';
 
 export default class Tracks extends React.Component {
 	render() {
+		if (this.props.sessions.length === 0) return <></>
+
 		return (
-			<div className='tracks'>{
-				this.props.sessions.length > 0 ? sessions2DOMs(this.props.sessions, this.props.template) : ''
+			<div
+				id='tracks'
+				style={ {display: 'block'} }
+			>{
+				sessions2DOMs(this.props.sessions, this.props.template)
 			}</div>
 		);
 	}
@@ -46,6 +51,10 @@ function activities2dom(activities, template) {
 }
 
 function getStyleFrom(template, url) {
+	if (url === 'arrow') {
+		return { text: "→", backgroundColor: "#FFF" };
+	}
+
 	return template.styles.reduce((found, style) => {
 		if (style.matching === 'match' && url === style.pattern) {
 			return style;
@@ -58,5 +67,5 @@ function getStyleFrom(template, url) {
 		}
 
 		return found;
-	}, {text: "", backgroundColor: ""});
+	}, {text: "他", backgroundColor: "#CCC"});
 }

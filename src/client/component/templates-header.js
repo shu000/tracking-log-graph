@@ -4,9 +4,6 @@ export default class TemplatesHeader extends React.Component {
   render() {
     return (
       <>
-        <button onClick={ e => {
-          this.props.onSelectCustomer('初期設定');
-        }}>取得テスト！</button>
     		<ul className="template-ul, template-labels, container">
     			<li className="template-li">
     				<label>ディレクトリ</label>
