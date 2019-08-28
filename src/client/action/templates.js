@@ -10,17 +10,26 @@ export function onSelectCustomer(customerName) {
   }
 }
 
-export function receiveTemplate(json) {
+export function receiveTemplate(template) {
   return {
     type: actionType.RECEIVE_TEMPLATE,
     payLoad: {
-      template: json
+      template: template
+    }
+  }
+}
+
+export function receiveError(msg) {
+  return {
+    type: actionType.RECEIVE_ERROR,
+    payLoad: {
+      error: msg
     }
   }
 }
 
 const URL = 'http://localhost:8080/api/templates/get';
-export function fetchTemplate() {
+export function fetchTemplate(name) {
 
   //dispatch(Loading...)
 
@@ -32,15 +41,16 @@ export function fetchTemplate() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: '初期設定'
+          name: name // is going to sanitize on server side.
         })
       })
       .then(
         response => response.json(),
         error => console.log(error)
       )
-      .then(json =>
-        dispatch(receiveTemplate(json))
-      )
+      .then(json => {
+        if (json.error) dispatch(receiveError(json.error));
+        else dispatch(receiveTemplate(json.result));
+      })
   }
 }

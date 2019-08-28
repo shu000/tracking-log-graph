@@ -26,4 +26,4 @@ render(
   document.getElementById('root')
 );
 
-store.dispatch(fetchTemplate()).then(() => { console.log(store.getState()) });
+store.dispatch(fetchTemplate('初期設定')).then(() => { console.log(store.getState()) });
