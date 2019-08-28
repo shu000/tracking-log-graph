@@ -4,7 +4,7 @@ export default class TemplatesHeader extends React.Component {
   render() {
     return (
       <>
-    		<ul className="template-ul, template-labels, container">
+    		<ul className="template-ul template-header">
     			<li className="template-li">
     				<label>ディレクトリ</label>
     			</li>

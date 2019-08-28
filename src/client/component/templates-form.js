@@ -4,7 +4,7 @@ export default class TemplatesForm extends React.Component {
   render() {
     return this.props.template.styles.map((template, i) => {
       return (
-  			<ul key={i} className="template-ul, template-inputs, container">
+  			<ul key={i} className="template-ul template-inputs">
   				<li className="template-li">
   					<input
   						name="pattern"
