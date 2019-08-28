@@ -28,15 +28,17 @@ module.exports = {
         ]
       },
       {
-        test: /\.css/,
+        test: /\.scss$/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
-              url: false
+              url: false,
+              importLoaders: 1
             }
-          }
+          },
+          'sass-loader'
         ],
       }
     ]

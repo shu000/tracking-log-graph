@@ -12,7 +12,7 @@ import { fetchTemplate } from './action/templates';
 import App from './container/app';
 import reducer from './reducer';
 
-import './css/index.css';
+import './css/index.scss';
 
 const store = createStore(
   reducer,
