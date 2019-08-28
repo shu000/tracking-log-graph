@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const sanitize = require('mongo-sanitize');
 
 const url = 'mongodb://mongo:27017/';
 const options = {
@@ -11,7 +12,7 @@ const options = {
 };
 
 const Templates = {
-  get: async () => {
+  get: async (name) => {
     const client = new MongoClient(url, options);
 
     try {
@@ -22,17 +23,25 @@ const Templates = {
       const db = client.db('templates');
 
       // Find collection `customers`
-      const result = await db.collection('customers').find().toArray();
+      const result = await db.collection('customers').find({
+        name: sanitize(name)
+      }).toArray();
 
       if (result.length === 0) {
-        // TODO
-        return '{ "error": "Failed to connect MongoDB" }';
+        return JSON.stringify({
+          error: 'Not found your input name.' // TODO: constantify
+        });
       }
 
-      return JSON.stringify(result[0]);
+      // `name` is primary key
+      return JSON.stringify({
+        result: result[0]
+      });
     } catch (err) {
       console.log(err.stack);
-      return '{ "error": "Failed to connect MongoDB" }';
+      return JSON.stringify({
+        error: 'Failed to connect MongoDB'
+      });
     } finally {
       if (client) client.close();
     }
