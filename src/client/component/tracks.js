@@ -5,10 +5,7 @@ export default class Tracks extends React.Component {
 		if (this.props.sessions.length === 0) return <></>
 
 		return (
-			<div
-				id='tracks'
-				style={ {display: 'block'} }
-			>{
+			<div id='tracks'>{
 				sessions2DOMs(this.props.sessions, this.props.template)
 			}</div>
 		);
