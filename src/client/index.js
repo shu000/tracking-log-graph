@@ -10,12 +10,12 @@ import { Provider } from 'react-redux';
 import { fetchTemplate } from './action/templates';
 
 import App from './container/app';
-import reducer from './reducer';
+import rootReducer from './reducer/reducer';
 
 import './css/index.scss';
 
 const store = createStore(
-  reducer,
+  rootReducer,
   applyMiddleware(thunk)
 );
 
