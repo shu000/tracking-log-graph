@@ -15,6 +15,19 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         template: getTemplates(action.payLoad.customerName)
       });
+    case actionType.ON_CHANGE_FORM:
+      return Object.assign({}, state, {
+        template: changedTemplateByText(state.template,
+                                        action.payLoad.index,
+                                        action.payLoad.key,
+                                        action.payLoad.value)
+      });
+    case actionType.ON_TURNON_RADIO:
+      return Object.assign({}, state, {
+        template: changedTemplateByRadio(state.template,
+                                         action.payLoad.index,
+                                         action.payLoad.key)
+      });
     case actionType.ON_DROP:
       return Object.assign({}, state, {
         sessions: json2sessions(action.payLoad.json)
@@ -106,6 +119,20 @@ function parseDate(dateString) {
   const date = splitted[1];
   const day = ["(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"][(new Date(year, month, date)).getDay()];
   return month + "/" + date + day;
+}
+
+function changedTemplateByText(prevTemplate, index, key, value) {
+  // Should use Object.assign(),
+  // because I think it's illegal for Redux to just insert into prevTemplate.
+  const changed = Object.assign({}, prevTemplate, {});
+  changed.styles[index][key] = value;
+  return changed;
+}
+
+function changedTemplateByRadio(prevTemplate, index, key) {
+  const changed = Object.assign({}, prevTemplate, {});
+  changed.styles[index].matching = key; // e.g. matching = 'match';
+  return changed;
 }
 
 /**

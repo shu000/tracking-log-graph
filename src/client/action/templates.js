@@ -10,6 +10,38 @@ export function onSelectCustomer(customerName) {
   }
 }
 
+/**
+ * It's called when text form in tempaltes-form is chenged
+ * @param  {[type]} index Index of props.templates, connecting changed form.
+ * @param  {[type]} key   props.templates.styles[index][key] = value
+ * @param  {[type]} value props.tempaltes.styles[index][key] = value
+ */
+export function onChangeForm(index, key, value) {
+  return {
+    type: actionType.ON_CHANGE_FORM,
+    payLoad: {
+      index: index,
+      key: key,
+      value: value
+    }
+  }
+}
+
+/**
+ * It's called when radio button in templates-form is turned to ON
+ * @param  {[type]} index Index of props.templates, connecting changed form.
+ * @param  {[type]} key   props.templates.styles[index].matching = key
+ */
+export function onTurnOnRadio(index, key) {
+  return {
+    type: actionType.ON_TURNON_RADIO,
+    payLoad: {
+      index: index,
+      key: key
+    }
+  }
+}
+
 export function receiveTemplate(template) {
   return {
     type: actionType.RECEIVE_TEMPLATE,
