@@ -5,7 +5,7 @@ import React from 'react';
  * Raise onDrop action when dropped a json
  * @type {String}
  */
-export default class JsonLoader extends React.Component {
+export default class Sessions extends React.Component {
   render() {
     if (this.props.sessions.length > 0) return <></>
 

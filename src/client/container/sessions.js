@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import JsonLoader from '../component/jsonLoader';
-import { onDrop } from '../action/jsonLoader';
+import Sessions from '../component/sessions';
+import { onDrop } from '../action/sessions';
 
 function mapStateToProps(state) {
   return state;
@@ -14,4 +14,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(JsonLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(Sessions);
