@@ -16,12 +16,19 @@ export default function reducer(state = initialState, action) {
         template: getTemplates(action.payLoad.customerName)
       });
     case actionType.ON_CHANGE_FORM:
-      return Object.assign({}, state, {
-        template: changedTemplateByText(state.template,
-                                        action.payLoad.index,
-                                        action.payLoad.key,
-                                        action.payLoad.value)
-      });
+      const template = changedTemplateByText(state.template,
+                                             action.payLoad.index,
+                                             action.payLoad.key,
+                                             action.payLoad.value);
+      if (template.styles.length - 1 === action.payLoad.index) {
+        return Object.assign({}, state, {
+          template: addAnEmptyStyle(template)
+        });
+      } else {
+        return Object.assign({}, state, {
+          template: template
+        });
+      }
     case actionType.ON_TURNON_RADIO:
       return Object.assign({}, state, {
         template: changedTemplateByRadio(state.template,
@@ -33,13 +40,35 @@ export default function reducer(state = initialState, action) {
         sessions: json2sessions(action.payLoad.json)
       });
     case actionType.RECEIVE_TEMPLATE:
-      console.log(action);
       return Object.assign({}, state, {
-        template: action.payLoad.template
+        // add emptyStyle to show an empty form
+        template: addAnEmptyStyle(action.payLoad.template)
+      });
+    case actionType.ON_ADD_NEW_STYLE:
+      return Object.assign({}, state, {
+        template: addAnEmptyStyle(state.template)
       });
     default:
       return state;
   }
+}
+
+/**
+ * Add an object to template for show an empty form.
+ * @param {Array} template Array is added to.
+ */
+function addAnEmptyStyle(template) {
+  const emptyStyle = {
+    pattern: '',
+    matching: 'match',
+    title: '',
+    text: '',
+    backgroundColor: ''
+  };
+
+  const copy = Object.assign({}, template, {});
+  copy.styles.push(emptyStyle);
+  return copy;
 }
 
 function json2sessions(json) {
