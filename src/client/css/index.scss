@@ -40,6 +40,12 @@ html, body, #root {
     display: flex;
     flex-direction: row;
 
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+
     .template-li {
       list-style: none;
       padding-left: 0.5em;
