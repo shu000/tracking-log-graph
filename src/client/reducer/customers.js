@@ -1,180 +1,24 @@
-import actionType from './actionType';
+const initialState = [];
 
-const initialState = {
-  sessions: [],
-  customers: [],
-  template: {
-    name: 'default',
-    styles: []
-  }
+export const ActionType = {
+  ON_CHANGE: 'ON_CHANGE',
+  ON_ADD_CUSTOMER: 'ON_ADD_CUSTOMER'
 };
 
-export default function reducer(state = initialState, action) {
+export default function customersReducer(state = initialState, action) {
   switch(action.type) {
-    case actionType.ON_SELECT_CUSTOMER:
-      return Object.assign({}, state, {
-        template: getTemplates(action.payLoad.customerName)
-      });
-    case actionType.ON_CHANGE_FORM:
-      const template = changedTemplateByText(state.template,
-                                             action.payLoad.index,
-                                             action.payLoad.key,
-                                             action.payLoad.value);
-      if (template.styles.length - 1 === action.payLoad.index) {
-        return Object.assign({}, state, {
-          template: addAnEmptyStyle(template)
-        });
-      } else {
-        return Object.assign({}, state, {
-          template: template
-        });
-      }
-    case actionType.ON_TURNON_RADIO:
-      return Object.assign({}, state, {
-        template: changedTemplateByRadio(state.template,
-                                         action.payLoad.index,
-                                         action.payLoad.key)
-      });
-    case actionType.ON_DROP:
-      return Object.assign({}, state, {
-        sessions: json2sessions(action.payLoad.json)
-      });
-    case actionType.RECEIVE_TEMPLATE:
-      return Object.assign({}, state, {
-        // add emptyStyle to show an empty form
-        template: addAnEmptyStyle(action.payLoad.template)
-      });
-    case actionType.ON_ADD_NEW_STYLE:
-      return Object.assign({}, state, {
-        template: addAnEmptyStyle(state.template)
-      });
+    case ActionType.ON_CHANGE:
+      return [...state, 'Event!'];
+    case ActionType.ON_ADD_CUSTOMER:
+      return [...state, 'NEW'];
     default:
       return state;
   }
 }
 
-/**
- * Add an object to template for show an empty form.
- * @param {Array} template Array is added to.
- */
-function addAnEmptyStyle(template) {
-  const emptyStyle = {
-    pattern: '',
-    matching: 'match',
-    title: '',
-    text: '',
-    backgroundColor: ''
-  };
-
-  const copy = Object.assign({}, template, {});
-  copy.styles.push(emptyStyle);
-  return copy;
+/*
+function isDuplicateCustomer(customerName) {
+  const duplicated = state.filter(name => name === customerName);
+  return duplicated > 0;
 }
-
-function json2sessions(json) {
-  const sessions = [];
-
-  for(let date of json["dates"]) {
-    for(let session of date["sessions"]) {
-      const dateString = parseDate(date["date"]);
-      if (sessions.length > 0 && sessions[0]["date"] === dateString) {
-        sessions[0]["activities"].unshift(objArrow);
-      } else {
-        sessions.unshift(sessionJson2Obj(dateString, session));
-      }
-
-      for(let activity of session["activities"]) {
-        // "GOAL" は直後のページが完了ページなので表示しなくて良い
-        if (activity.type !== "PAGEVIEW") continue;
-        // TODO: "details" とその中身は length === 1 で確定なのか？
-        sessions[0]["activities"].unshift(activityJson2Obj(activity));
-      }
-    }
-  }
-
-  return sessions;
-}
-
-
-const objArrow = {
-  time: "",
-  pageTitle: "",
-  pageURL: "arrow"
-};
-
-/**
- * [sessionJson2Obj description]
- * @param  {[type]} dateString [description]
- * @param  {[type]} session    [description]
- * @return {[type]}            [description]
- */
-function sessionJson2Obj(dateString, session) {
-  return {
-    date: dateString,
-    device: session["deviceCategory"] === "tablet" ? "TB" : ("mobile" ? "SP" : "PC"),
-    channel: session["channel"] === "Organic Search" ? "検索" : "参照",
-    activities: []
-  };
-}
-
-/**
- * Convert object likes;
- *   {
- *     "time":"7:36 午前", "type":"PAGEVIEW", "repeatActivityTimes":[],
- *     "details":[{"ページのタイトル":["健康へのこだわり"], "ページの URL":["/health/"]}]
- *   }
- *    =>
- *   { "time":"7:36 午前", "pageTitle":"健康へのこだわり", "pageURL":"/health/" }
- * @param  {Object} activity
- * @return {Object}
- */
-function activityJson2Obj(activity) {
-  return {
-    time: activity["time"],
-    pageTitle: activity["details"][0]["ページのタイトル"][0],
-    pageURL: activity["details"][0]["ページの URL"][0],
-  };
-}
-
-/**
- * "mm dd, yyyy" => "mm/dd(day)"
- * @param  {String} dateString "mm dd, yyyy"
- * @return {String}            "mm/dd(day)"
- */
-function parseDate(dateString) {
-  const splitted = dateString.replace(",", "").split(" ");
-  const year = splitted[2];
-  const month = splitted[0];
-  const date = splitted[1];
-  const day = ["(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"][(new Date(year, month, date)).getDay()];
-  return month + "/" + date + day;
-}
-
-function changedTemplateByText(prevTemplate, index, key, value) {
-  // Should use Object.assign(),
-  // because I think it's illegal for Redux to just insert into prevTemplate.
-  const changed = Object.assign({}, prevTemplate, {});
-  changed.styles[index][key] = value;
-  return changed;
-}
-
-function changedTemplateByRadio(prevTemplate, index, key) {
-  const changed = Object.assign({}, prevTemplate, {});
-  changed.styles[index].matching = key; // e.g. matching = 'match';
-  return changed;
-}
-
-/**
- * [getTemplates description]
- * @param  {[type]} cunstomerName [description]
- * @return {[type]}               [description]
- */
-function getTemplates(cunstomerName) {
-  return {
-    name: '初期設定',
-    styles: [
-      { pattern: '/', matching: 'match', text: '根', backgroundColor: "#C00" },
-      { pattern: '/health/', matching: 'startsWith', text: '健', backgroundColor: "#CC0" }
-    ]
-  };
-}
+*/

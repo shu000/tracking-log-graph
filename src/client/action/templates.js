@@ -1,15 +1,6 @@
 import fetch from 'cross-fetch';
 import { ActionType } from '../reducer/templates';
 
-export function onSelectCustomer(customerName) {
-  return {
-    type: ActionType.ON_SELECT_CUSTOMER,
-    payLoad: {
-      customerName: customerName
-    }
-  }
-}
-
 /**
  * It's called when text form in tempaltes-form is chenged
  * @param  {[type]} index Index of props.templates, connecting changed form.
@@ -61,7 +52,7 @@ export function receiveError(msg) {
 }
 
 const URL = 'http://localhost:8080/api/templates/get';
-export function fetchTemplate(name) {
+export function fetchTemplate(customerName) {
 
   //dispatch(Loading...)
 
@@ -73,7 +64,7 @@ export function fetchTemplate(name) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: name // is going to sanitize on server side.
+          name: customerName // is going to sanitize on server side.
         })
       })
       .then(

@@ -31,8 +31,37 @@ html, body, #root {
   flex-direction: row;
 }
 
-#templates {
+#left-pane {
   width: 50%;
+}
+
+#right-pane {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#droparea {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed #333;
+  background-color: #EEE;
+}
+
+#tracks {
+  width: 100%;
+}
+
+#customers {
+  width: 100%;
+
+  form {
+    width: 100%;
+  }
+}
+
+#templates {
+  width: 100%;
 
   .template-ul {
     width: 100%;
@@ -80,14 +109,4 @@ html, body, #root {
       }
     }
   }
-}
-
-#droparea {
-  width: 50%;
-  border: 1px dashed #333;
-  background-color: #EEE;
-}
-
-#tracks {
-  width: 50%;
 }
