@@ -4,13 +4,10 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux';
 
-/**
- *
- */
-import { fetchTemplate } from './action/templates';
-
 import App from './container/app';
 import rootReducer from './reducer/reducer';
+import { fetchTemplate } from './action/templates';
+import { fetchCustomers } from './action/customers';
 
 import './css/index.scss';
 
@@ -26,4 +23,6 @@ render(
   document.getElementById('root')
 );
 
-store.dispatch(fetchTemplate('初期設定')).then(() => { console.log(store.getState()) });
+store.dispatch(fetchCustomers()).then(() => {
+  store.dispatch(fetchTemplate(store.getState().customers.select));
+});
