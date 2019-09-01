@@ -1,10 +1,12 @@
-import actionType from '../actionType';
-
 const initialState = [];
+
+export const ActionType = {
+  ON_DROP: 'ON_DROP'
+};
 
 export default function sessionsReducer(state = initialState, action) {
   switch(action.type) {
-    case actionType.ON_DROP:
+    case ActionType.ON_DROP:
       return [...state, ...(json2sessions(action.payLoad.json))];
     default:
       return state;

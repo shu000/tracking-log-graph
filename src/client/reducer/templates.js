@@ -1,36 +1,40 @@
-import actionType from '../actionType';
-
 const initialState = {
   name: 'default',
   styles: []
 };
 
+export const ActionType = {
+  ON_CHANGE_FORM: 'ON_CHANGE_FORM',
+  ON_TURNON_RADIO: 'ON_TURNON_RADIO',
+  RECEIVE_TEMPLATE: 'RECEIVE_TEMPLATE',
+  RECEIVE_ERROR: 'RECEIVE_ERROR'
+};
+
 export default function templatesReducer(state = initialState, action) {
   switch(action.type) {
-    case actionType.ON_CHANGE_FORM:
-      const template = changedTemplateByText(
+    case ActionType.ON_CHANGE_FORM:
+      const template = updateTemplateByText(
         state,
         action.payLoad.index,
         action.payLoad.key,
         action.payLoad.value
       );
 
+      // add a new empty form, when last form get chenged
       if (template.styles.length - 1 === action.payLoad.index) {
         return Object.assign({}, state, addAnEmptyStyle(template));
       } else {
         return Object.assign({}, state, template);
       }
-    case actionType.ON_TURNON_RADIO:
-      return Object.assign({}, state, changedTemplateByRadio(
+    case ActionType.ON_TURNON_RADIO:
+      return Object.assign({}, state, updateTemplateByRadio(
         state,
         action.payLoad.index,
         action.payLoad.key)
       );
-    case actionType.RECEIVE_TEMPLATE:
+    case ActionType.RECEIVE_TEMPLATE:
       // add emptyStyle to show an empty form
       return Object.assign({}, state, addAnEmptyStyle(action.payLoad.template));
-    case actionType.ON_ADD_NEW_STYLE:
-      return Object.assign({}, state, addAnEmptyStyle(state));
     default:
       return state;
   }
@@ -54,16 +58,31 @@ function addAnEmptyStyle(template) {
   return copy;
 }
 
-function changedTemplateByText(prevTemplate, index, key, value) {
+/**
+ * Update state when input[type='text'] get chenged
+ * @param  {[type]} prevTemplate State
+ * @param  {[type]} index        State[index]
+ * @param  {[type]} key          State[index][key]
+ * @param  {[type]} value        State[index][key] = value
+ * @return {[type]}              Updated state
+ */
+function updateTemplateByText(prevTemplate, index, key, value) {
   // Should use Object.assign(),
   // because I think it's illegal for Redux to just insert into prevTemplate.
-  const changed = Object.assign({}, prevTemplate, {});
-  changed.styles[index][key] = value;
-  return changed;
+  const updated = Object.assign({}, prevTemplate, {});
+  updated.styles[index][key] = value;
+  return updated;
 }
 
-function changedTemplateByRadio(prevTemplate, index, key) {
-  const changed = Object.assign({}, prevTemplate, {});
-  changed.styles[index].matching = key; // e.g. matching = 'match';
-  return changed;
+/**
+ * Update state when input[type='radio'] get chenged
+ * @param  {[type]} prevTemplate State
+ * @param  {[type]} index        State[index]
+ * @param  {[type]} key          State[index].matching = key
+ * @return {[type]}              Updated state
+ */
+function updateTemplateByRadio(prevTemplate, index, key) {
+  const updated = Object.assign({}, prevTemplate, {});
+  updated.styles[index].matching = key; // e.g. matching = 'match';
+  return updated;
 }

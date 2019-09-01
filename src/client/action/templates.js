@@ -1,9 +1,9 @@
-import actionType from '../actionType';
 import fetch from 'cross-fetch';
+import { ActionType } from '../reducer/templates';
 
 export function onSelectCustomer(customerName) {
   return {
-    type: actionType.ON_SELECT_CUSTOMER,
+    type: ActionType.ON_SELECT_CUSTOMER,
     payLoad: {
       customerName: customerName
     }
@@ -18,7 +18,7 @@ export function onSelectCustomer(customerName) {
  */
 export function onChangeForm(index, key, value) {
   return {
-    type: actionType.ON_CHANGE_FORM,
+    type: ActionType.ON_CHANGE_FORM,
     payLoad: {
       index: index,
       key: key,
@@ -34,7 +34,7 @@ export function onChangeForm(index, key, value) {
  */
 export function onTurnOnRadio(index, key) {
   return {
-    type: actionType.ON_TURNON_RADIO,
+    type: ActionType.ON_TURNON_RADIO,
     payLoad: {
       index: index,
       key: key
@@ -44,7 +44,7 @@ export function onTurnOnRadio(index, key) {
 
 export function receiveTemplate(template) {
   return {
-    type: actionType.RECEIVE_TEMPLATE,
+    type: ActionType.RECEIVE_TEMPLATE,
     payLoad: {
       template: template
     }
@@ -53,7 +53,7 @@ export function receiveTemplate(template) {
 
 export function receiveError(msg) {
   return {
-    type: actionType.RECEIVE_ERROR,
+    type: ActionType.RECEIVE_ERROR,
     payLoad: {
       error: msg
     }
