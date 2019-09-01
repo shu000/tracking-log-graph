@@ -32,11 +32,15 @@ export default class Customers extends React.Component {
   }
 }
 
+/**
+ * Clear form[name="templatesForm"].
+ * Because, Browser remember user inputs,
+ * when just replace forms by React's state change event,
+ */
 function clearTemplatesForms() {
   const forms = document.getElementsByClassName('templatesForm');
   // Type of forms is HTMLCollection, so convert it to Array before loop.
   Array.prototype.slice.call(forms).map(form => {
-    console.log(form);
     form.reset();
   });
 }
