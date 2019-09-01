@@ -3,6 +3,40 @@ const { Templates } = require('./templates');
   console.log( await Templates.getCustomers() );
   console.log( await Templates.getTemplate('初期設定') );
   console.log( await Templates.getTemplate('わし') );
+
+  console.log("======================")
+  console.log( await Templates.updateStyles('わし', {
+    styles: [
+      {
+        "pattern" : "/",
+        "matching" : "match",
+        "title": "正拳突き",
+        "text" : "心",
+        "backgroundColor" : "#0AA"
+      },
+      {
+        "pattern": "/health",
+        "matching": "startsWith",
+        "title": "テストだよ",
+        "text": "耳",
+        "backgroundColor": "#333"
+      }
+    ]
+  }));
+
+  console.log("======================")
+  console.log( await Templates.updateStyles('わし', {
+    styles: [
+      {
+        "pattern" : "/",
+        "matching" : "match",
+        "title": "正拳突き",
+        "text" : "心",
+        "backgroundColor" : "#0AA"
+      }
+    ]
+  }));
+
 })();
 
 /*

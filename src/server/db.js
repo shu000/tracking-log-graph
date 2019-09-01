@@ -25,6 +25,20 @@ const DB = {
     } finally {
       if (client) client.close();
     }
+  },
+  update: async (condition, updating) => {
+    const client = MongoClient(url, options);
+    try {
+      await client.connect();
+      const db = client.db('templates');
+
+      return await db.collection('customers').updateOne(
+        condition,
+        { $set: updating }
+      );
+    } finally {
+      if (client) client.close();
+    }
   }
 }
 

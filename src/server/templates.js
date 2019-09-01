@@ -19,8 +19,26 @@ const Templates = {
     try {
       const result = await DB.find({ customerName: sanitize(customerName) }, {});
 
+      if (result.length === 0) {
+        return JSON.stringify({ result: {} });
+      }
+
       return JSON.stringify({
         result: result[0] // customerName is primaryKey
+      });
+    } catch (error) {
+      return returnError(error);
+    }
+  },
+  updateStyles: async (customerName, styles) => {
+    try {
+      const result = await DB.update(
+        { customerName: sanitize(customerName) },
+        styles
+      );
+
+      return JSON.stringify({
+        result: result
       });
     } catch (error) {
       return returnError(error);
