@@ -7,8 +7,12 @@ const { Templates } = require('./src/server/templates');
 
 app.use(express.static(__dirname + '/dist'));
 
-app.post('/api/templates/get', bodyParser.json(), async (req, res) => {
-  res.send(await Templates.get(req.body.name));
+app.post('/api/templates/customers', bodyParser.json(), async (req, res) => {
+  res.send(await Templates.getCustomers());
+});
+
+app.post('/api/templates/template', bodyParser.json(), async (req, res) => {
+  res.send(await Templates.getTemplate(req.body.name));
 });
 
 app.get('*', function (req, res) {

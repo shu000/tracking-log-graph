@@ -1,57 +1,38 @@
-const MongoClient = require('mongodb').MongoClient;
-const sanitize = require('mongo-sanitize');
-
-const url = 'mongodb://mongo:27017/';
-const options = {
-  auth: {
-    user: process.env.MONGO_USER,
-    password: process.env.MONGO_PASSWORD
-  },
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-};
+const { DB } = require('./db');
 
 const Templates = {
-  get: async (name) => {
-    const client = new MongoClient(url, options);
-
+  getCustomers: async () => {
     try {
-      // Connect to MongoDB
-      await client.connect();
+      const result = await DB.find({}, { customerName: 1 });
 
-      // Database
-      const db = client.db('templates');
-
-      // Find collection `customers`
-      const result = await db.collection('customers').find({
-        name: sanitize(name)
-      }).toArray();
-
-      if (result.length === 0) {
-        return JSON.stringify({
-          error: 'Not found your input name.' // TODO: constantify
-        });
-      }
-
-      // `name` is primary key
       return JSON.stringify({
-        result: result[0]
+        result: result.map(obj => {
+          return obj.customerName
+        })
       });
-    } catch (err) {
-      console.log(err.stack);
-      return JSON.stringify({
-        error: 'Failed to connect MongoDB'
-      });
-    } finally {
-      if (client) client.close();
+    } catch (error) {
+      return returnError(error);
     }
   },
-  insert: async customerName => {
+  getTemplate: async customerName => {
+    try {
+      const result = await DB.find({ customerName: customerName }, {});
 
-  },
-  update: async customerName => {
-
+      return JSON.stringify({
+        result: result[0] // customerName is primaryKey
+      });
+    } catch (error) {
+      return returnError(error);
+    }
   }
-};
+}
+
+function returnError(error) {
+  console.log(error.stack);
+  return JSON.stringify({
+    error: 'Failed to connect Database.',
+    message: error.message
+  });
+}
 
 module.exports.Templates = Templates;
