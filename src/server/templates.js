@@ -1,4 +1,5 @@
 const { DB } = require('./db');
+const sanitize = require('mongo-sanitize');
 
 const Templates = {
   getCustomers: async () => {
@@ -16,7 +17,7 @@ const Templates = {
   },
   getTemplate: async customerName => {
     try {
-      const result = await DB.find({ customerName: customerName }, {});
+      const result = await DB.find({ customerName: sanitize(customerName) }, {});
 
       return JSON.stringify({
         result: result[0] // customerName is primaryKey
