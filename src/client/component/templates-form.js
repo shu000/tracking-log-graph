@@ -5,14 +5,14 @@ export default class TemplatesForm extends React.Component {
     return this.props.template.styles.map((template, i) => {
       return (
   			<ul key={i} className="template-ul template-inputs">
-          <form>
+          <form className="templatesForm">
     				<li className="template-li">
     					<input
     						name="pattern"
     						type="text"
     						defaultValue={ template.pattern }
                 onChange={ e => {
-                  // Should write at here because `i` is depends on here's map roop.
+                  // Should write at here because `i` is depends on here's map loop.
                   this.props.onChangeForm(i, e.target.name, e.target.value);
 
                   // so, what's differences between followings? what's `event`!?
@@ -60,7 +60,7 @@ export default class TemplatesForm extends React.Component {
     						type="text"
     						defaultValue={ template.title }
                 onChange={ e => {
-                  // Should write at here because `i` is depends on here's map roop.
+                  // Should write at here because `i` is depends on here's map loop.
                   this.props.onChangeForm(i, e.target.name, e.target.value);
                 }}
     					/>
@@ -71,7 +71,7 @@ export default class TemplatesForm extends React.Component {
     						type="text"
     						defaultValue={ template.text }
                 onChange={ e => {
-                  // Should write at here because `i` is depends on here's map roop.
+                  // Should write at here because `i` is depends on here's map loop.
                   this.props.onChangeForm(i, e.target.name, e.target.value);
                 }}
     					/>
@@ -83,7 +83,7 @@ export default class TemplatesForm extends React.Component {
     						defaultValue={ template.backgroundColor }
     						style={{ backgroundColor: template.backgroundColor }}
                 onChange={ e => {
-                  // Should write at here because `i` is depends on here's map roop.
+                  // Should write at here because `i` is depends on here's map loop.
                   this.props.onChangeForm(i, e.target.name, e.target.value);
                 }}
     					/>

@@ -4,13 +4,12 @@ export default class Customers extends React.Component {
   render() {
     return (
       <div id='customers'>
-        <form>
+        <form className='customerForm'>
           <select name='customerName' onChange={ e => {
-            console.log(e.target.value);
-            this.props.onChange(e.target.value);
+            this.props.fetchTemplate(e.target.value);
           }}>
             {
-              this.props.customers.map((name, i) => {
+              this.props.customers.customers.map((name, i) => {
                 return <option key={i} value={ name }>{ name }</option>
               })
             }
@@ -31,4 +30,13 @@ export default class Customers extends React.Component {
       </div>
     );
   }
+}
+
+function clearTemplatesForms() {
+  const forms = document.getElementsByClassName('templatesForm');
+  // Type of forms is HTMLCollection, so convert it to Array before loop.
+  Array.prototype.slice.call(forms).map(form => {
+    console.log(form);
+    form.reset();
+  });
 }

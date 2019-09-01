@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Customers from '../component/customers';
-import { onChange, onAddCustomer } from '../action/customers';
+import { onAddCustomer } from '../action/customers';
+import { fetchTemplate } from '../action/templates';
 
 function mapStateToProps(state) {
   return state;
@@ -10,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChange: (customerName) => { dispatch(onChange(customerName)) },
-    onAddCustomer: (customerName) => { dispatch(onAddCustomer(customerName)) }
+    onAddCustomer: (customerName) => { dispatch(onAddCustomer(customerName)) },
+    fetchTemplate: (customerName) => { dispatch(fetchTemplate(customerName)) }
   };
 }
 
