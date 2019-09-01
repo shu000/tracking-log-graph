@@ -15,13 +15,13 @@ export default function templatesReducer(state = initialState, action) {
     case ActionType.ON_CHANGE_FORM:
       const template = updateTemplateByText(
         state,
-        action.payLoad.index,
-        action.payLoad.key,
-        action.payLoad.value
+        action.payload.index,
+        action.payload.key,
+        action.payload.value
       );
 
       // add a new empty form, when last form get chenged
-      if (template.styles.length - 1 === action.payLoad.index) {
+      if (template.styles.length - 1 === action.payload.index) {
         return Object.assign({}, state, addAnEmptyStyle(template));
       } else {
         return Object.assign({}, state, template);
@@ -29,12 +29,12 @@ export default function templatesReducer(state = initialState, action) {
     case ActionType.ON_TURNON_RADIO:
       return Object.assign({}, state, updateTemplateByRadio(
         state,
-        action.payLoad.index,
-        action.payLoad.key)
+        action.payload.index,
+        action.payload.key)
       );
     case ActionType.RECEIVE_TEMPLATE:
       // add emptyStyle to show an empty form
-      return Object.assign({}, state, addAnEmptyStyle(action.payLoad.template));
+      return Object.assign({}, state, addAnEmptyStyle(action.payload.template));
     default:
       return state;
   }

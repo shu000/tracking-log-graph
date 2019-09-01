@@ -3,7 +3,7 @@ import { ActionType } from '../reducer/customers';
 export function onChange(customerName) {
   return {
     type: ActionType.ON_CHANGE,
-    payLoad: {
+    payload: {
       customerName: customerName
     }
   }
@@ -12,7 +12,7 @@ export function onChange(customerName) {
 export function onAddCustomer(customerName) {
   return {
     type: ActionType.ON_ADD_CUSTOMER,
-    payLoad: {
+    payload: {
       customerName: customerName
     }
   }
@@ -21,7 +21,7 @@ export function onAddCustomer(customerName) {
 export function receiveCustomers(customers) {
   return {
     type: ActionType.RECEIVE_CUSTOMERS,
-    payLoad: {
+    payload: {
       customers: customers
     }
   }

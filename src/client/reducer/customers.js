@@ -13,16 +13,16 @@ export default function customersReducer(state = initialState, action) {
   switch(action.type) {
     case ActionType.ON_CHANGE:
       return Object.assign({}, state, {
-        select: action.payLoad.customerName
+        select: action.payload.customerName
       })
     case ActionType.ON_ADD_CUSTOMER:
       return Object.assign({}, state, {
-        customers: [...state.customers, action.payLoad.customerName]
+        customers: [...state.customers, action.payload.customerName]
       });
     case ActionType.RECEIVE_CUSTOMERS:
       return Object.assign({}, state, {
-        select: action.payLoad.customers[0],
-        customers: action.payLoad.customers
+        select: action.payload.customers[0],
+        customers: action.payload.customers
       });
     default:
       return state;

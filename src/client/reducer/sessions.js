@@ -7,7 +7,7 @@ export const ActionType = {
 export default function sessionsReducer(state = initialState, action) {
   switch(action.type) {
     case ActionType.ON_DROP:
-      return [...state, ...(json2sessions(action.payLoad.json))];
+      return [...state, ...(json2sessions(action.payload.json))];
     default:
       return state;
   }

@@ -4,7 +4,7 @@ export function onDrop(json) {
   return {
     //type: actionType.ON_DROP,
     type: ActionType.ON_DROP,
-    payLoad: {
+    payload: {
       json: json
     }
   }

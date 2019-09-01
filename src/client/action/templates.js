@@ -10,7 +10,7 @@ import { ActionType } from '../reducer/templates';
 export function onChangeForm(index, key, value) {
   return {
     type: ActionType.ON_CHANGE_FORM,
-    payLoad: {
+    payload: {
       index: index,
       key: key,
       value: value
@@ -26,7 +26,7 @@ export function onChangeForm(index, key, value) {
 export function onTurnOnRadio(index, key) {
   return {
     type: ActionType.ON_TURNON_RADIO,
-    payLoad: {
+    payload: {
       index: index,
       key: key
     }
@@ -37,7 +37,7 @@ export function receiveTemplate(template) {
   console.log(template);
   return {
     type: ActionType.RECEIVE_TEMPLATE,
-    payLoad: {
+    payload: {
       template: template
     }
   }
@@ -46,7 +46,7 @@ export function receiveTemplate(template) {
 export function receiveError(msg) {
   return {
     type: ActionType.RECEIVE_ERROR,
-    payLoad: {
+    payload: {
       error: msg
     }
   }
