@@ -16,7 +16,7 @@ app.post('/api/customers/add', bodyParser.json(), async (req, res) => {
 });
 
 app.post('/api/template', bodyParser.json(), async (req, res) => {
-  res.send(await Templates.getTemplate(req.body.name));
+  res.send(await Templates.getTemplate(req.body.customerName));
 });
 
 app.post('/api/template/update', bodyParser.json(), async (req, res) => {

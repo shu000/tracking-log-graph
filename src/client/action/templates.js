@@ -65,7 +65,7 @@ export function fetchTemplate(customerName) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: customerName // is going to sanitize on server side.
+          customerName: customerName // is going to sanitize on server side.
         })
       })
       .then(
