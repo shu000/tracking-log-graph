@@ -78,3 +78,36 @@ export function fetchTemplate(customerName) {
       })
   }
 }
+
+const URL_UPDATE = 'http://localhost:8080/api/template/update';
+export function updateTemplate(template) {
+
+  //dispatch(Loading...)
+
+  return function(dispatch) {
+    return fetch(URL_UPDATE, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(template)
+      })
+      .then(
+        response => {
+          console.log(response);
+          return response.json();
+        },
+        error => console.log(error)
+      )
+      .then(json => {
+        console.log(json);
+      })
+      /*
+      .then(json => {
+        if (json.error) dispatch(receiveError(json.error));
+        else dispatch(receiveTemplate(json.result));
+      })
+      */
+  }
+}

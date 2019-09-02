@@ -4,6 +4,10 @@ export default class TemplatesHeader extends React.Component {
   render() {
     return (
       <>
+        <button id='template-save-button' onClick={ e => {
+          const updatingTemplate = removeEmptyStyles(this.props.template);
+          this.props.updateTemplate(updatingTemplate);
+        }}>Save</button>
     		<ul className="template-ul template-header">
     			<li className="template-li">
     				<label>ディレクトリ</label>
@@ -30,4 +34,18 @@ export default class TemplatesHeader extends React.Component {
       </>
     );
   }
+}
+
+function removeEmptyStyles(template) {
+  return {
+    customerName: template.customerName,
+    styles: template.styles.filter(style => {
+      return (
+        style.pattern !== '' ||
+        style.title !== '' ||
+        style.text !== '' ||
+        style.backgroundColor !== ''
+      );
+    })
+  };
 }

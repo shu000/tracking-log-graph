@@ -30,11 +30,24 @@ const Templates = {
       return returnError(error);
     }
   },
-  updateStyles: async (customerName, styles) => {
+  /**
+   * Overwrite `styles` property in a record.
+   * @param  {String}  customerName record.customeName
+   * @param  {Array}   styles       Overwrite record.styles by this.
+   * @return {Promise}              [description]
+   */
+  updateTemplate: async (customerName, styles) => {
+    console.log(customerName);
+    console.log(styles);
+    const sanitizedStyles = styles.map(obj => {
+      Object.keys(obj).map(key => { obj[key] = sanitize(obj[key]) });
+      return obj;
+    });
+
     try {
       const result = await DB.update(
         { customerName: sanitize(customerName) },
-        styles
+        { styles: sanitizedStyles }
       );
 
       return JSON.stringify({

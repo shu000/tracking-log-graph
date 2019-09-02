@@ -15,6 +15,10 @@ app.post('/api/template', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getTemplate(req.body.name));
 });
 
+app.post('/api/template/update', bodyParser.json(), async (req, res) => {
+  res.send(await Templates.updateTemplate(req.body.customerName, req.body.styles));
+});
+
 app.get('*', function (req, res) {
   res.sendFile(__dirname + '/dist/index.html')
 });
