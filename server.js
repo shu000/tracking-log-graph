@@ -7,11 +7,11 @@ const { Templates } = require('./src/server/templates');
 
 app.use(express.static(__dirname + '/dist'));
 
-app.post('/api/templates/customers', bodyParser.json(), async (req, res) => {
+app.post('/api/customers', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getCustomers());
 });
 
-app.post('/api/templates/template', bodyParser.json(), async (req, res) => {
+app.post('/api/template', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getTemplate(req.body.name));
 });
 

@@ -27,7 +27,7 @@ export function receiveCustomers(customers) {
   }
 }
 
-const URL = 'http://localhost:8080/api/templates/customers';
+const URL = 'http://localhost:8080/api/customers';
 export function fetchCustomers() {
 
   //dispatch(Loading...)

@@ -52,7 +52,7 @@ export function receiveError(msg) {
   }
 }
 
-const URL = 'http://localhost:8080/api/templates/template';
+const URL = 'http://localhost:8080/api/template';
 export function fetchTemplate(customerName) {
 
   //dispatch(Loading...)
