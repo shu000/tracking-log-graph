@@ -11,6 +11,10 @@ app.post('/api/customers', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getCustomers());
 });
 
+app.post('/api/customers/add', bodyParser.json(), async (req, res) => {
+  res.send(await Templates.addCustomer(customerName));
+});
+
 app.post('/api/template', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getTemplate(req.body.name));
 });

@@ -39,6 +39,17 @@ const DB = {
     } finally {
       if (client) client.close();
     }
+  },
+  insert: async adding => {
+    const client = MongoClient(url, options);
+    try {
+      await client.connect();
+      const db = client.db('templates');
+
+      return await db.collection('customers').insertOne(adding);
+    } finally {
+      if (client) client.close();
+    }
   }
 }
 

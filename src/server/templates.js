@@ -37,8 +37,6 @@ const Templates = {
    * @return {Promise}              [description]
    */
   updateTemplate: async (customerName, styles) => {
-    console.log(customerName);
-    console.log(styles);
     const sanitizedStyles = styles.map(obj => {
       Object.keys(obj).map(key => { obj[key] = sanitize(obj[key]) });
       return obj;
@@ -49,6 +47,30 @@ const Templates = {
         { customerName: sanitize(customerName) },
         { styles: sanitizedStyles }
       );
+
+      return JSON.stringify({
+        result: result
+      });
+    } catch (error) {
+      return returnError(error);
+    }
+  },
+  /**
+   * Add an record, like following
+   *   {
+   *     customerName: request.body,
+   *     styles: []
+   *   }
+   * @param  {String}  customerName record.customeName
+   * @param  {Array}   styles       Overwrite record.styles by this.
+   * @return {Promise}              [description]
+   */
+  addCustomer: async (customerName) => {
+    try {
+      const result = await DB.insert({
+        customerName: sanitize(customerName),
+        styles: []
+      });
 
       return JSON.stringify({
         result: result

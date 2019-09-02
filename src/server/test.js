@@ -5,7 +5,7 @@ const { Templates } = require('./templates');
   console.log( await Templates.getTemplate('わし') );
 
   console.log("======================")
-  console.log( await Templates.updateStyles('わし', [
+  console.log( await Templates.updateTemplate('わし', [
     {
       "pattern" : "/",
       "matching" : "match",
@@ -23,7 +23,7 @@ const { Templates } = require('./templates');
   ]));
 
   console.log("======================")
-  console.log( await Templates.updateStyles('わし', [
+  console.log( await Templates.updateTemplate('わし', [
     {
       "pattern" : "/",
       "matching" : "match",
@@ -32,6 +32,18 @@ const { Templates } = require('./templates');
       "backgroundColor" : "#0AA"
     }
   ]));
+
+  console.log("==add====================")
+  console.log( await Templates.addCustomer('sample', [
+    {
+      "pattern" : "/",
+      "matching" : "match",
+      "title": "new",
+      "text" : "new",
+      "backgroundColor" : "#AAA"
+    }
+  ]));
+
 
 })();
 
