@@ -1,5 +1,5 @@
 const initialState = {
-  name: 'default',
+  customerName: 'default',
   styles: []
 };
 
