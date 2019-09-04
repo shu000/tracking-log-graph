@@ -6,6 +6,7 @@ export default class Customers extends React.Component {
       <div id='customers'>
         <form className='customerForm'>
           <select name='customerName' onChange={ e => {
+            clearTemplatesForms();
             this.props.fetchTemplate(e.target.value);
           }}>{
             this.props.customers.customers.map((name, i) => {
