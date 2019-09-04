@@ -53,15 +53,9 @@ function getStyleFrom(template, url) {
 	}
 
 	return template.styles.reduce((found, style) => {
-		if (style.matching === 'match' && url === style.pattern) {
-			return style;
-		}
-		if (style.matching === 'startsWith' && url.startsWith(style.pattern)) {
-			return style;
-		}
-		if (style.matching === 'includes' && url.includes(style.pattern)) {
-			return style;
-		}
+		if (style.matching === 'match' && url === style.pattern) return style;
+		else if (style.matching === 'startsWith' && url.startsWith(style.pattern)) return style;
+		else if (style.matching === 'includes' && url.includes(style.pattern)) return style;
 
 		return found;
 	}, {text: "他", backgroundColor: "#CCC"});
