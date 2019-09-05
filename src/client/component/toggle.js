@@ -5,9 +5,9 @@ export default class Templates extends React.Component {
     return (
       <div id='toggle' onClick={e => {
         this.props.onClick();
-      }}>
-        <p>&gt;</p>
-      </div>
+      }}>{
+        this.props.toggle.isOpenForms ? <p>&gt;</p> : <p>&lt;</p>
+      }</div>
     );
   }
 }
