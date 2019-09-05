@@ -34,7 +34,6 @@ export function onTurnOnRadio(index, key) {
 }
 
 export function receiveTemplate(template) {
-  console.log(template);
   return {
     type: ActionType.RECEIVE_TEMPLATE,
     payload: {
@@ -95,7 +94,6 @@ export function updateTemplate(template) {
       })
       .then(
         response => {
-          console.log(response);
           return response.json();
         },
         error => console.log(error)
