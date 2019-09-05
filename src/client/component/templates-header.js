@@ -4,7 +4,7 @@ export default class TemplatesHeader extends React.Component {
   render() {
     return (
       <>
-        <button id='template-save-button' onClick={ e => {
+        <button id='template-save-button' className='btn btn-success' onClick={ e => {
           const updatingTemplate = removeEmptyStyles(this.props.template);
           this.props.updateTemplate(updatingTemplate);
         }}>Save</button>

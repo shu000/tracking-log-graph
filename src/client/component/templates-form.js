@@ -10,6 +10,7 @@ export default class TemplatesForm extends React.Component {
     					<input
     						name="pattern"
     						type="text"
+                className="form-control"
     						defaultValue={ template.pattern }
                 onChange={ e => {
                   // Should write at here because `i` is depends on here's map loop.
@@ -58,6 +59,7 @@ export default class TemplatesForm extends React.Component {
     					<input
     						name="title"
     						type="text"
+                className="form-control"
     						defaultValue={ template.title }
                 onChange={ e => {
                   // Should write at here because `i` is depends on here's map loop.
@@ -69,6 +71,7 @@ export default class TemplatesForm extends React.Component {
     					<input
     						name="text"
     						type="text"
+                className="form-control"
     						defaultValue={ template.text }
                 onChange={ e => {
                   // Should write at here because `i` is depends on here's map loop.
@@ -80,6 +83,7 @@ export default class TemplatesForm extends React.Component {
     					<input
     						name="backgroundColor"
     						type="text"
+                className="form-control"
     						defaultValue={ template.backgroundColor }
     						style={{ backgroundColor: template.backgroundColor }}
                 onChange={ e => {

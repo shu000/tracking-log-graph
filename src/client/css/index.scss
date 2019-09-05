@@ -1,8 +1,19 @@
+@import 'override-bootstrap.scss';
+
 * {
   margin: 0;
   padding: 0;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+ul {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+}
+
+label {
+  font-size: 0.5rem;
 }
 
 body {
@@ -52,6 +63,10 @@ html, body, #root {
   width: 100%;
 }
 
+#btn-open-toggle {
+  width: 20px;
+  height: 100%;
+}
 #customers {
   width: 100%;
 
@@ -105,6 +120,8 @@ html, body, #root {
       input {
         &[type='text'] {
           width: 100%;
+          height: auto;
+          padding: 0.1rem;
         }
       }
     }

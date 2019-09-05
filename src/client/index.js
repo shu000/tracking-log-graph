@@ -9,8 +9,6 @@ import rootReducer from './reducer/reducer';
 import { fetchTemplate } from './action/templates';
 import { fetchCustomers } from './action/customers';
 
-import './css/index.scss';
-
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
