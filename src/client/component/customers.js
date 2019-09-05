@@ -3,7 +3,7 @@ import React from 'react';
 export default class Customers extends React.Component {
   render() {
     return (
-      <div id='customers'>
+      <div id='customers' style={ this.props.toggle.isOpenForms ? { display: 'block' } : { display: 'none' } }>
         <form className='customerForm'>
           <select name='customerName' className='form-control' onChange={ e => {
             clearTemplatesForms();

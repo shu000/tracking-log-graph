@@ -21,16 +21,11 @@ export default class App extends React.Component {
           this.props.toggle.isOpenForms ? { width: '50%' } : { width: '15%' }
         }>
           <Toggle />
-          <div id='right-contents'>{ (() => {
-            if (this.props.toggle.isOpenForms) { return (
-              <>
-                <Customers />
-                <Templates />
-              </>
-            )} else {
-              return <Legends />
-            }
-          })()}</div>
+          <div id='right-contents'>
+            <Customers />
+            <Templates />
+            <Legends />
+          </div>
         </div>
       </div>
     );
