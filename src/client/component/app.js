@@ -4,6 +4,7 @@ import Tracks from '../container/tracks';
 import Toggle from '../container/toggle';
 import Customers from '../container/customers';
 import Templates from '../container/templates';
+import Legends from '../container/legends';
 
 export default class App extends React.Component {
 
@@ -27,7 +28,7 @@ export default class App extends React.Component {
                 <Templates />
               </>
             )} else {
-              return <div></div>
+              return <Legends />
             }
           })()}</div>
         </div>

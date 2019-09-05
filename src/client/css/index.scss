@@ -12,6 +12,10 @@ ul {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 label {
   font-size: 0.5rem;
 }
@@ -111,7 +115,6 @@ html, body, #root {
     }
 
     .template-li {
-      list-style: none;
       padding-left: 0.5em;
       padding-right: 0.5em;
 
@@ -145,5 +148,13 @@ html, body, #root {
         }
       }
     }
+  }
+}
+
+#legends {
+  .legends-li {
+    padding: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.5rem;
   }
 }
