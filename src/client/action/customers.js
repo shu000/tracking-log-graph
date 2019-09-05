@@ -73,7 +73,7 @@ export function addCustomer(customerName) {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(fetchCustomers());
+      else dispatch(fetchCustomers());// TODO
     })
   }
 }
