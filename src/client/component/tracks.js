@@ -58,5 +58,5 @@ function getStyleFrom(template, url) {
 		else if (style.matching === 'includes' && url.includes(style.pattern)) return style;
 
 		return found;
-	}, {text: "他", backgroundColor: "#CCC"});
+	}, { text: url, backgrounColor: "#CCC" });
 }
