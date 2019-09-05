@@ -4,10 +4,12 @@ export default class TemplatesHeader extends React.Component {
   render() {
     return (
       <>
-        <button id='template-save-button' className='btn btn-success' onClick={ e => {
-          const updatingTemplate = removeEmptyStyles(this.props.template);
-          this.props.updateTemplate(updatingTemplate);
-        }}>Save</button>
+        <div className='template-btn-container'>
+          <button id='template-save-button' className='btn btn-success' onClick={ e => {
+            const updatingTemplate = removeEmptyStyles(this.props.template);
+            this.props.updateTemplate(updatingTemplate);
+          }}>保存</button>
+        </div>
     		<ul className="template-ul template-header">
     			<li className="template-li">
     				<label>ディレクトリ</label>

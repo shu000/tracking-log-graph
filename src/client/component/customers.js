@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class Customers extends React.Component {
   render() {
+    // TOOD: stupid jsx...
     return (
       <div id='customers' style={ this.props.toggle.isOpenForms ? { display: 'block' } : { display: 'none' } }>
         <form className='customerForm'>
@@ -14,28 +15,32 @@ export default class Customers extends React.Component {
               return <option key={i} value={ name }>{ name }</option>
             })
           }</select>
-          <input id='newCustomerName' name='newCustonerName' className='form-control'></input>
-          <button className='btn btn-primary' onClick={ e => {
-            // Cansel events for preventing send form.
-            e.preventDefault();
-	          e.stopPropagation();
+          <div className='customers-ope'>
+            <div className='customers-ope-add'>
+              <input id='newCustomerName' name='newCustonerName' className='form-control'></input>
+              <button className='btn btn-primary' onClick={ e => {
+                // Cansel events for preventing send form.
+                e.preventDefault();
+    	          e.stopPropagation();
 
-            // TODO: use store
-            const newCustomerName = document.getElementById('newCustomerName').value;
+                // TODO: use store
+                const newCustomerName = document.getElementById('newCustomerName').value;
 
-            this.props.addCustomer(newCustomerName);
+                this.props.addCustomer(newCustomerName);
 
-            return false;
-          }}>追加</button>
-          <button className='btn btn-danger' onClick={ e => {
-            // Cansel events for preventing send form.
-            e.preventDefault();
-	          e.stopPropagation();
+                return false;
+              }}>追加</button>
+            </div>
+            <button className='btn btn-danger' onClick={ e => {
+              // Cansel events for preventing send form.
+              e.preventDefault();
+  	          e.stopPropagation();
 
-            this.props.deleteCustomer(this.props.customers.selecting);
+              this.props.deleteCustomer(this.props.customers.selecting);
 
-            return false;
-          }}>削除</button>
+              return false;
+            }}>削除</button>
+          </div>
         </form>
       </div>
     );
