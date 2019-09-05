@@ -15,6 +15,10 @@ app.post('/api/customers/add', bodyParser.json(), async (req, res) => {
   res.send(await Templates.addCustomer(req.body.customerName));
 });
 
+app.post('/api/customer/delete', bodyParser.json(), async (req, res) => {
+  res.send(await Templates.deleteCustomer(req.body.customerName));
+});
+
 app.post('/api/template', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getTemplate(req.body.customerName));
 });

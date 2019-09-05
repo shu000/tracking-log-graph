@@ -50,6 +50,17 @@ const DB = {
     } finally {
       if (client) client.close();
     }
+  },
+  delete: async condition => {
+    const client = MongoClient(url, options);
+    try {
+      await client.connect();
+      const db = client.db('templates');
+
+      return await db.collection('customers').deleteOne(condition);
+    } finally {
+      if (client) client.close();
+    }
   }
 }
 

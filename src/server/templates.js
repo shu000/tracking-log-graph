@@ -56,12 +56,30 @@ const Templates = {
     }
   },
   /**
-   * Add an record, like following
+   * Delete a record
+   * @param  {[type]}  customerName removing record's customerName
+   * @return {Promise}              [description]
+   */
+  deleteCustomer: async customerName => {
+    try {
+      const result = await DB.delete(
+        { customerName: sanitize(customerName) }
+      );
+
+      return JSON.stringify({
+        result: result
+      });
+    } catch (error) {
+      return returnError(error);
+    }
+  },
+  /**
+   * Add a record, like following
    *   {
    *     customerName: request.body,
    *     styles: []
    *   }
-   * @param  {String}  customerName record.customeName
+   * @param  {String}  customerName record.customerName
    * @param  {Array}   styles       Overwrite record.styles by this.
    * @return {Promise}              [description]
    */

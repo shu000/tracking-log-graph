@@ -44,6 +44,8 @@ const { Templates } = require('./templates');
     }
   ]));
 
+  console.log("==remove==================")
+  console.log( await Templates.deleteCustomer('sample'));
 
 })();
 
