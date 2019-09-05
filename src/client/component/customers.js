@@ -7,6 +7,7 @@ export default class Customers extends React.Component {
         <form className='customerForm'>
           <select name='customerName' className='form-control' onChange={ e => {
             clearTemplatesForms();
+            this.props.onChange(e.target.value);
             this.props.fetchTemplate(e.target.value);
           }}>{
             this.props.customers.customers.map((name, i) => {
@@ -25,7 +26,16 @@ export default class Customers extends React.Component {
             this.props.addCustomer(newCustomerName);
 
             return false;
-          }}>Add</button>
+          }}>追加</button>
+          <button className='btn btn-danger' onClick={ e => {
+            // Cansel events for preventing send form.
+            e.preventDefault();
+	          e.stopPropagation();
+
+            this.props.deleteCustomer(this.props.customers.selecting);
+
+            return false;
+          }}>削除</button>
         </form>
       </div>
     );

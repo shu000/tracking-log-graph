@@ -1,5 +1,5 @@
 const initialState = {
-  select: '',
+  selecting: '',
   customers: [],
 };
 
@@ -13,7 +13,7 @@ export default function customersReducer(state = initialState, action) {
   switch(action.type) {
     case ActionType.ON_CHANGE:
       return Object.assign({}, state, {
-        select: action.payload.customerName
+        selecting: action.payload.customerName
       })
     case ActionType.ON_ADD_CUSTOMER:
       return Object.assign({}, state, {
@@ -21,7 +21,7 @@ export default function customersReducer(state = initialState, action) {
       });
     case ActionType.RECEIVE_CUSTOMERS:
       return Object.assign({}, state, {
-        select: action.payload.customers[0],
+        selecting: action.payload.customers[0],
         customers: action.payload.customers
       });
     default:

@@ -15,7 +15,7 @@ app.post('/api/customers/add', bodyParser.json(), async (req, res) => {
   res.send(await Templates.addCustomer(req.body.customerName));
 });
 
-app.post('/api/customer/delete', bodyParser.json(), async (req, res) => {
+app.post('/api/customers/delete', bodyParser.json(), async (req, res) => {
   res.send(await Templates.deleteCustomer(req.body.customerName));
 });
 

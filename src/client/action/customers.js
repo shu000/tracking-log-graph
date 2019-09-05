@@ -77,3 +77,30 @@ export function addCustomer(customerName) {
     })
   }
 }
+
+const URL_DELETE = 'http://localhost:8080/api/customers/delete';
+export function deleteCustomer(customerName) {
+
+  //dispatch(Loading...)
+
+  return function(dispatch) {
+    return fetch(URL_DELETE, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        customerName: customerName
+      })
+    })
+    .then(
+      response => response.json(),
+      error => console.log(error)
+    )
+    .then(json => {
+      if (json.error) dispatch(receiveError(json.error));
+      else dispatch(fetchCustomers());// TODO
+    })
+  }
+}

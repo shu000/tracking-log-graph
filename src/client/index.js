@@ -22,5 +22,5 @@ render(
 );
 
 store.dispatch(fetchCustomers()).then(() => {
-  store.dispatch(fetchTemplate(store.getState().customers.select));
+  store.dispatch(fetchTemplate(store.getState().customers.selecting));
 });
