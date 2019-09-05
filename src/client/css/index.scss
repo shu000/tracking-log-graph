@@ -49,7 +49,7 @@ html, body, #root {
 #right-pane {
   width: 50%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 #droparea {
@@ -63,10 +63,30 @@ html, body, #root {
   width: 100%;
 }
 
-#btn-open-toggle {
-  width: 20px;
+#toggle {
+  width: 30px;
   height: 100%;
+  font-size: 1rem;
+  background-color: #FFF;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-out;
+
+  &:hover {
+    background-color: #EEE;
+    color: #333;
+    cursor: pointer;
+  }
 }
+
+#right-contents {
+  width: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+}
+
 #customers {
   width: 100%;
 
