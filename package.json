@@ -4,10 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node server.js",
-    "client": "npx webpack-dev-server --config ./webpack.config.js --open --mode development",
-    "build": "npx node-sass ./src/client/css/index.scss ./dist/index.css; npx webpack --config ./webpack.config.js --mode development",
-    "start": "npm run build; node ./server.js"
+    "start": "npx npm-run-all -s build run:server",
+    "build": "npx npm-run-all -p build:sass build:js",
+    "debug": "npx npm-run-all -p watch:js",
+    "watch:js": "npx webpack-dev-server --config ./webpack.config.js --open --mode development",
+    "build:sass": "npx npm-run-all -p build:sass:index build:sass:bootstrap",
+    "build:sass:index": "npx node-sass ./src/client/css/index.scss ./dist/index.css",
+    "build:sass:bootstrap": "npx node-sass ./src/client/css/bootstrap-4.3.1/scss/bootstrap.scss ./dist/bootstrap.css",
+    "build:js": "npx webpack --config ./webpack.config.js --mode development",
+    "run:server": "node ./server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +23,7 @@
     "express": "^4.17.1",
     "mongo-sanitize": "^1.0.1",
     "mongodb": "^3.3.0",
+    "npm-run-all": "^4.1.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
