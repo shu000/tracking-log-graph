@@ -5,7 +5,7 @@ export default class Customers extends React.Component {
     return (
       <div id='customers'>
         <form className='customerForm'>
-          <select name='customerName' onChange={ e => {
+          <select name='customerName' className='form-control' onChange={ e => {
             this.props.fetchTemplate(e.target.value);
           }}>
             {
@@ -14,8 +14,8 @@ export default class Customers extends React.Component {
               })
             }
           </select>
-          <input id='newCustomerName' name='newCustonerName'></input>
-          <button onClick={ e => {
+          <input id='newCustomerName' name='newCustonerName' className='form-control'></input>
+          <button className='btn btn-success' onClick={ e => {
             // Cansel events for preventing send form.
             e.preventDefault();
 	          e.stopPropagation();
@@ -25,7 +25,7 @@ export default class Customers extends React.Component {
             this.props.onAddCustomer(newCustomerName);
 
             return false;
-          }}>Add an customer</button>
+          }}>Add</button>
         </form>
       </div>
     );
