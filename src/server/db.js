@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const sanitize = require('mongo-sanitize');
 
-const url = 'mongodb://mongo:27017/';
+const url = process.env.MONGO_ENDPOINT
 const options = {
   auth: {
     user: process.env.MONGO_USER,
