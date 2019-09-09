@@ -1,4 +1,5 @@
 import { ActionType } from '../reducer/customers';
+import { GET_CUSTOMERS, ADD_CUSTOMER, DELETE_CUSTOMER } from './endpoints';
 
 export function onChange(customerName) {
   return {
@@ -27,13 +28,12 @@ export function receiveCustomers(customers) {
   }
 }
 
-const URL = 'http://localhost:8080/api/customers';
 export function fetchCustomers() {
 
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL, {
+    return fetch(GET_CUSTOMERS, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -51,13 +51,12 @@ export function fetchCustomers() {
   }
 }
 
-const URL_ADD = 'http://localhost:8080/api/customers/add';
 export function addCustomer(customerName) {
 
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL_ADD, {
+    return fetch(ADD_CUSTOMER, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -78,13 +77,12 @@ export function addCustomer(customerName) {
   }
 }
 
-const URL_DELETE = 'http://localhost:8080/api/customers/delete';
 export function deleteCustomer(customerName) {
 
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL_DELETE, {
+    return fetch(DELETE_CUSTOMER, {
       method: 'post',
       headers: {
         'Accept': 'application/json',

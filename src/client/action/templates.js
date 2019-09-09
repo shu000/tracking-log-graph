@@ -1,5 +1,6 @@
 import fetch from 'cross-fetch';
 import { ActionType } from '../reducer/templates';
+import { GET_TEMPLATE, UPDATE_TEMPLATE } from './endpoints';
 
 /**
  * It's called when text form in tempaltes-form is chenged
@@ -51,13 +52,12 @@ export function receiveError(msg) {
   }
 }
 
-const URL = 'http://localhost:8080/api/template';
 export function fetchTemplate(customerName) {
 
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL, {
+    return fetch(GET_TEMPLATE, {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -78,13 +78,12 @@ export function fetchTemplate(customerName) {
   }
 }
 
-const URL_UPDATE = 'http://localhost:8080/api/template/update';
 export function updateTemplate(template) {
 
   //dispatch(Loading...)
 
   return function(dispatch) {
-    return fetch(URL_UPDATE, {
+    return fetch(UPDATE_TEMPLATE, {
         method: 'post',
         headers: {
           'Accept': 'application/json',
