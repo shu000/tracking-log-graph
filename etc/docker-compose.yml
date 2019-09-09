@@ -1,23 +1,20 @@
-version: '3'
+version: '3.7'
 
 services:
-  tracking:
-    image: node:10.16.0
-    container_name: app
+  tkg-app:
+    build:
+      context: .
+      dockerfile: Dockerfile-app
     ports:
-      - 8080:8080
-    volumes:
-      - ../:/tracking-log-graph
+      - 80:80
+    init: true
     tty: true
-    command: /bin/bash
 
-  mongo:
-    image: mongo:4.0.12
-    container_name: mongo
+  tkg-mongo:
+    build:
+      context: .
+      dockerfile: Dockerfile-mongo
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - 27017:27017
     volumes:
