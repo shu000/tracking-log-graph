@@ -9,11 +9,13 @@ import rootReducer from './reducer/reducer';
 import { fetchTemplate } from './action/templates';
 import { fetchCustomers } from './action/customers';
 
+// Create Redux-store
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
+// Render HTML with Redux-store
 render(
   <Provider store={ store }>
     <App />
@@ -21,6 +23,9 @@ render(
   document.getElementById('root')
 );
 
-store.dispatch(fetchCustomers()).then(() => {
+// fetch all customers
+store.dispatch(fetchCustomers())
+.then(() => {
+  // fetch a customers's template data
   store.dispatch(fetchTemplate(store.getState().customers.selecting));
 });
