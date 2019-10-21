@@ -6,11 +6,12 @@
   "scripts": {
     "start": "npx npm-run-all -s build run:server",
     "build": "npx npm-run-all -p build:sass build:js",
-    "debug": "npx npm-run-all -p watch:js",
+    "watch": "npx npm-run-all -p watch:js watch:sass",
     "watch:js": "npx webpack-dev-server --config ./webpack.config.js --open --mode development",
+    "watch:sass": "npx node-sass -w ./src/client/css/index.scss ./dist/index.css",
     "build:sass": "npx npm-run-all -p build:sass:index build:sass:bootstrap",
     "build:sass:index": "npx node-sass ./src/client/css/index.scss ./dist/index.css",
-    "build:sass:bootstrap": "npx node-sass ./src/client/css/bootstrap-4.3.1/scss/bootstrap.scss ./dist/bootstrap.css",
+    "build:sass:bootstrap": "cp ./src/client/css/bootstrap.css ./dist/bootstrap.css",
     "build:js": "npx webpack --config ./webpack.config.js --mode development",
     "run:server": "node ./server.js"
   },
