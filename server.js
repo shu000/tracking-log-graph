@@ -7,6 +7,14 @@ const { Templates } = require('./src/server/templates');
 
 app.use(express.static(__dirname + '/dist'));
 
+// Allow Origin "127.0.0.1:8080" to let webpack-dev-server to access api.
+// TODO: Only Debug Flag
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.post('/api/customers', bodyParser.json(), async (req, res) => {
   res.send(await Templates.getCustomers());
 });
