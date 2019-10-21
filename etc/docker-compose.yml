@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile-app
     ports:
       - 80:80
+    volumes:
+      - ../../tracking-log-graph:/tracking-log-graph
     init: true
     tty: true
 

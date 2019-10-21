@@ -5,6 +5,7 @@ ENV MONGO_ENDPOINT="mongodb://tkg-mongo:27017/"
 ENV MONGO_USER user
 ENV MONGO_PASSWORD pass
 
+VOLUME ["/tracking-log-graph"]
 WORKDIR /tracking-log-graph
 RUN npm install
 
