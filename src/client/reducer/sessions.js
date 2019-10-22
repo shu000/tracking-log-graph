@@ -13,15 +13,102 @@ export default function sessionsReducer(state = initialState, action) {
   }
 }
 
-function json2sessions(json) { const sessions = [];
+/**
+ * Convet json to an array
+ * TODO: Refactoring
+ *
+ * e.g.
+ * FROM
+		{
+			"date": "8 1, 2019",
+			"hasGoal": false,
+			"hasRevenue": false,
+			"sessionCount": 7,
+			"sessions": [
+				{
+					"duration": "00 分 00 秒",
+					"deviceCategory": "desktop",
+					"channel": "(Other)",
+					"activitySummary": {
+						"PAGEVIEW": "1"
+					},
+					"activities": [
+						{
+							"time": "3:02 午後",
+							"type": "PAGEVIEW",
+							"repeatActivityTimes": [],
+							"details": [
+								{
+									"ページのタイトル": [
+										"集客メソッド"
+									],
+									"ページの URL": [
+										"/service/webpromotion/"
+									]
+								}
+							],
+							"pageTitle": "集客メソッド"
+						}
+					]
+				},
+				{
+					"duration": "00 分 00 秒",
+					"deviceCategory": "desktop",
+					"channel": "(Other)",
+					"activitySummary": {
+						"PAGEVIEW": "1"
+					},
+					"activities": [
+						{
+							"time": "3:02 午後",
+							"type": "PAGEVIEW",
+							"repeatActivityTimes": [],
+							"details": [
+								{
+									"ページのタイトル": [
+										"集客メソッド"
+									],
+									"ページの URL": [
+										"/service/webpromotion/"
+									]
+								}
+							],
+							"pageTitle": "集客メソッド"
+						}
+					]
+				}
+      ]
+    }
+ * TO
+    [
+      {
+        date: "8/1(日)",
+        device: "SP",
+        channel: "その他",
+        activities: [
+          { time: "3:02 午後", pageTitle: "集客メソッド", pageURL: "/service/webpromotion" },
+          { time: "3:02 午後", pageTitle: "集客メソッド", pageURL: "/service/webpromotion" }
+        ]
+      }
+    ]
+ *
+ * @param  {Object} json Json user dropped
+ * @return {Array}      Converted array
+ */
+function json2sessions(json) {
+  const sessions = [];
 
   for(let date of json["dates"]) {
     for(let session of date["sessions"]) {
       const dateString = parseDate(date["date"]);
       if (sessions.length > 0 && sessions[0]["date"] === dateString) {
+        // 同じ日の別セッションなら矢印で挟む
         sessions[0]["activities"].unshift(objArrow);
       } else {
-        sessions.unshift(sessionJson2Obj(dateString, session));
+        // 別日のセッションを新たに発見したら、日付・デバイス・流入経路を抽出する
+        // 抽出対象セッションはその日の最初のセッション(=== 配列末尾のセッション)
+        const firstSession = date["sessions"][date["sessions"].length - 1];
+        sessions.unshift(sessionJson2Obj(dateString, firstSession));
       }
 
       for(let activity of session["activities"]) {
@@ -49,10 +136,25 @@ const objArrow = {
  * @return {[type]}            [description]
  */
 function sessionJson2Obj(dateString, session) {
+  let channel = "その他";
+  switch(session["channel"]) {
+    case "Organic Search":
+      channel = "検索";
+      break;
+    case "Direct":
+      channel = "直接訪問";
+      break;
+    case "Referral":
+      channel = "参照";
+      break;
+    default:
+      channel = "その他";
+  }
+
   return {
     date: dateString,
     device: session["deviceCategory"] === "tablet" ? "TB" : ("mobile" ? "SP" : "PC"),
-    channel: session["channel"] === "Organic Search" ? "検索" : "参照",
+    channel: channel,
     activities: []
   };
 }
