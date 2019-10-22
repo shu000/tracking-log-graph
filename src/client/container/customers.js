@@ -6,7 +6,7 @@ import { onChange, onChangeAddingName, addCustomer, deleteCustomer } from '../ac
 import { fetchTemplate } from '../action/templates';
 
 function mapStateToProps(state) {
-  return state;
+  return Object.assign({}, state.customers, state.toggle);
 }
 
 function mapDispatchToProps(dispatch) {
