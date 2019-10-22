@@ -10,6 +10,15 @@ export function onChange(customerName) {
   }
 }
 
+export function onChangeAddingName(addingCustomerName) {
+  return {
+    type: ActionType.ON_CHANGE_ADDING_NAME,
+    payload: {
+      addingCustomerName: addingCustomerName
+    }
+  }
+}
+
 export function onAddCustomer(customerName) {
   return {
     type: ActionType.ON_ADD_CUSTOMER,

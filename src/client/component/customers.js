@@ -17,14 +17,20 @@ export default class Customers extends React.Component {
           }</select>
           <div className='customers-ope'>
             <div className='customers-ope-add'>
-              <input id='newCustomerName' name='newCustonerName' className='form-control'></input>
+              <input id='newCustomerName'
+                name='newCustonerName'
+                className='form-control'
+                onChange={ e => {
+                  this.props.onChangeAddingName(e.target.value);
+                }
+              }></input>
               <button className='btn btn-primary' onClick={ e => {
                 // Cansel events for preventing send form.
                 e.preventDefault();
     	          e.stopPropagation();
 
-                // TODO: use store
-                const newCustomerName = document.getElementById('newCustomerName').value;
+                const newCustomerName = this.props.customers.addingCustomerName;
+                document.getElementById('newCustomerName').value = '';// TODO: use store
 
                 this.props.addCustomer(newCustomerName);
 

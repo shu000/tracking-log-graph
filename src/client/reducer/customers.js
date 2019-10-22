@@ -5,6 +5,7 @@ const initialState = {
 
 export const ActionType = {
   ON_CHANGE: 'ON_CHANGE',
+  ON_CHANGE_ADDING_NAME: 'ON_CHANGE_ADDING_NAME',
   ON_ADD_CUSTOMER: 'ON_ADD_CUSTOMER',
   RECEIVE_CUSTOMERS: 'RECEIVE_CUSTOMERS'
 };
@@ -14,10 +15,15 @@ export default function customersReducer(state = initialState, action) {
     case ActionType.ON_CHANGE:
       return Object.assign({}, state, {
         selecting: action.payload.customerName
-      })
+      });
+    case ActionType.ON_CHANGE_ADDING_NAME:
+      return Object.assign({}, state, {
+        addingCustomerName: action.payload.addingCustomerName
+      });
     case ActionType.ON_ADD_CUSTOMER:
       return Object.assign({}, state, {
-        customers: [...state.customers, action.payload.customerName]
+        customers: [...state.customers, action.payload.customerName],
+        addingCustomerName: "ON_ADD_CUSTOMER" // 追加する際に追加フォームの文字列をクリア
       });
     case ActionType.RECEIVE_CUSTOMERS:
       return Object.assign({}, state, {
