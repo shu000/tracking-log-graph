@@ -1,5 +1,6 @@
 import { ActionType } from '../reducer/customers';
 import { GET_CUSTOMERS, ADD_CUSTOMER, DELETE_CUSTOMER } from './endpoints';
+import { fetchTemplate } from './templates';
 
 export function onChange(customerName) {
   return {
@@ -28,16 +29,17 @@ export function onAddCustomer(customerName) {
   }
 }
 
-export function receiveCustomers(customers) {
+export function receiveCustomers(customers, selecting) {
   return {
     type: ActionType.RECEIVE_CUSTOMERS,
     payload: {
+      selecting: selecting,
       customers: customers
     }
   }
 }
 
-export function fetchCustomers() {
+export function fetchCustomers(selectingCustomerName) {
 
   //dispatch(Loading...)
 
@@ -55,7 +57,7 @@ export function fetchCustomers() {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(receiveCustomers(json.result));
+      else dispatch(receiveCustomers(json.result, selectingCustomerName));
     })
   }
 }
@@ -81,12 +83,20 @@ export function addCustomer(customerName) {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(fetchCustomers());// TODO
+      else {
+        dispatch(fetchTemplate(customerName));
+        dispatch(fetchCustomers(customerName));
+      }
     })
   }
 }
 
-export function deleteCustomer(customerName) {
+/**
+ * [deleteCustomer description]
+ * @param  {String} customerName          will be deleted.
+ * @param  {String} selectingCustomerName will be selected after complete to delete.
+ */
+export function deleteCustomer(customerName, selectingCustomerName) {
 
   //dispatch(Loading...)
 
@@ -107,7 +117,11 @@ export function deleteCustomer(customerName) {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(fetchCustomers());// TODO
+      else if (selectingCustomerName) {
+        console.log(selectingCustomerName)
+        dispatch(fetchTemplate(selectingCustomerName));
+        dispatch(fetchCustomers(selectingCustomerName));
+      }
     })
   }
 }

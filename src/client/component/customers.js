@@ -13,31 +13,32 @@ export default class Customers extends React.Component {
    * Event Handler when select gets changed.
    * @param  {Object} event React Event Object
    */
-  handleChangeSelect(event) {
+  handleChangeSelect(e) {
     clearTemplatesForms();
-    this.props.onChange(event.target.value);
-    this.props.fetchTemplate(event.target.value);
+    this.props.onChange(e.target.value);
+    this.props.fetchTemplate(e.target.value);
   }
 
   /**
    * Event Handler when input gets changed.
    * @param  {Object} event React Event Object
    */
-  handleChangeInput(event) {
-    this.props.onChangeAddingName(event.target.value);
+  handleChangeInput(e) {
+    this.props.onChangeAddingName(e.target.value);
   }
 
   /**
    * Event Handler when add-button get clicked.
    * @param  {Object} event React Event Object
    */
-  handleClickAddButton(event) {
+  handleClickAddButton(e) {
     // Cansel events for preventing send form.
-    event.preventDefault();
-    event.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
     document.getElementById('newCustomerName').value = '';// TODO: use store
 
+    clearTemplatesForms();
     this.props.addCustomer(this.props.addingCustomerName);
 
     return false;
@@ -47,12 +48,23 @@ export default class Customers extends React.Component {
    * Event Handler when remove-button get clicked.
    * @param  {Object} event React Event Object
    */
-  handleClickRemoveButton(event) {
+  handleClickRemoveButton(e) {
     // Cansel events for preventing send form.
-    event.preventDefault();
-    event.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-    this.props.deleteCustomer(this.props.selecting);
+    const customers = this.props.customers;
+    const deleting = this.props.selecting;
+
+    // Just delete if it's last one
+    if (customers.length === 1) {
+      this.props.deleteCustomer(deleting);
+      return false;
+    }
+
+    const deletingIndex = customers.findIndex(item => item === deleting);
+    const selecting = customers[deletingIndex === 0 ? 1 : deletingIndex - 1];
+    this.props.deleteCustomer(deleting, selecting);
 
     return false;
   }

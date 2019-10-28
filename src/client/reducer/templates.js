@@ -34,7 +34,6 @@ export default function templatesReducer(state = initialState, action) {
       );
     case ActionType.RECEIVE_TEMPLATE:
       // add emptyStyle to show an empty form
-      console.log(action);
       return Object.assign({}, state, addAnEmptyStyle(action.payload.template));
     default:
       return state;
