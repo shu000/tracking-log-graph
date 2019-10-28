@@ -1,5 +1,6 @@
 import { ActionType } from '../reducer/customers';
 import { GET_CUSTOMERS, ADD_CUSTOMER, DELETE_CUSTOMER } from './endpoints';
+import { fetchTemplate } from './templates';
 
 export function onChange(customerName) {
   return {
@@ -81,7 +82,10 @@ export function addCustomer(customerName) {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(fetchCustomers());// TODO
+      else {
+        dispatch(fetchTemplate(customerName));
+        dispatch(fetchCustomers());
+      }
     })
   }
 }

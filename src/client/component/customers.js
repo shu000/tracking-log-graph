@@ -38,6 +38,7 @@ export default class Customers extends React.Component {
 
     document.getElementById('newCustomerName').value = '';// TODO: use store
 
+    clearTemplatesForms();
     this.props.addCustomer(this.props.addingCustomerName);
 
     return false;
