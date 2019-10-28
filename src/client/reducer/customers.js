@@ -26,8 +26,9 @@ export default function customersReducer(state = initialState, action) {
         addingCustomerName: "ON_ADD_CUSTOMER" // 追加する際に追加フォームの文字列をクリア
       });
     case ActionType.RECEIVE_CUSTOMERS:
+      const selectingCustomerName = action.payload.selecting ? action.payload.selecting : action.payload.customers[0];
       return Object.assign({}, state, {
-        selecting: action.payload.customers[0],
+        selecting: selectingCustomerName,
         customers: action.payload.customers
       });
     default:

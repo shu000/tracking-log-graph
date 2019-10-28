@@ -29,16 +29,17 @@ export function onAddCustomer(customerName) {
   }
 }
 
-export function receiveCustomers(customers) {
+export function receiveCustomers(customers, selecting) {
   return {
     type: ActionType.RECEIVE_CUSTOMERS,
     payload: {
+      selecting: selecting,
       customers: customers
     }
   }
 }
 
-export function fetchCustomers() {
+export function fetchCustomers(selectingCustomerName) {
 
   //dispatch(Loading...)
 
@@ -56,7 +57,7 @@ export function fetchCustomers() {
     )
     .then(json => {
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(receiveCustomers(json.result));
+      else dispatch(receiveCustomers(json.result, selectingCustomerName));
     })
   }
 }
@@ -84,7 +85,7 @@ export function addCustomer(customerName) {
       if (json.error) dispatch(receiveError(json.error));
       else {
         dispatch(fetchTemplate(customerName));
-        dispatch(fetchCustomers());
+        dispatch(fetchCustomers(customerName));
       }
     })
   }
