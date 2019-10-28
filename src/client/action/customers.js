@@ -91,7 +91,12 @@ export function addCustomer(customerName) {
   }
 }
 
-export function deleteCustomer(customerName) {
+/**
+ * [deleteCustomer description]
+ * @param  {String} customerName          will be deleted.
+ * @param  {String} selectingCustomerName will be selected after complete to delete.
+ */
+export function deleteCustomer(customerName, selectingCustomerName) {
 
   //dispatch(Loading...)
 
@@ -111,8 +116,14 @@ export function deleteCustomer(customerName) {
       error => console.log(error)
     )
     .then(json => {
+      console.log("complete delete customer");
+      console.log(selectingCustomerName);
       if (json.error) dispatch(receiveError(json.error));
-      else dispatch(fetchCustomers());// TODO
+      else if (selectingCustomerName) {
+        console.log(selectingCustomerName)
+        dispatch(fetchTemplate(selectingCustomerName));
+        dispatch(fetchCustomers(selectingCustomerName));
+      }
     })
   }
 }

@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch) {
     onChange: customerName => { dispatch(onChange(customerName)) },
     onChangeAddingName: addingCustomerName => { dispatch(onChangeAddingName(addingCustomerName)) },
     addCustomer: customerName => { dispatch(addCustomer(customerName)) },
-    deleteCustomer: customerName => { dispatch(deleteCustomer(customerName)) },
+    deleteCustomer: (customerName, selectingCustomerName) => { dispatch(deleteCustomer(customerName, selectingCustomerName)) },
     fetchTemplate: customerName => { dispatch(fetchTemplate(customerName)) }
   };
 }
