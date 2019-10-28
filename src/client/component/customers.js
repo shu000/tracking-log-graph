@@ -53,7 +53,21 @@ export default class Customers extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    this.props.deleteCustomer(this.props.selecting);
+    const customers = this.props.customers;
+    const deleting = this.props.selecting;
+
+    console.log(customers);
+    console.log(deleting);
+    // Just delete if it's last one
+    if (customers.length === 1) {
+      this.props.deleteCustomer(deleting);
+      return false;
+    }
+
+    const deletingIndex = customers.findIndex(item => item === deleting);
+    const selecting = customers[deletingIndex === 0 ? 0 : deletingIndex - 1];
+    console.log(selecting);
+    this.props.deleteCustomer(deleting, selecting);
 
     return false;
   }
