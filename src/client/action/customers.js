@@ -116,8 +116,6 @@ export function deleteCustomer(customerName, selectingCustomerName) {
       error => console.log(error)
     )
     .then(json => {
-      console.log("complete delete customer");
-      console.log(selectingCustomerName);
       if (json.error) dispatch(receiveError(json.error));
       else if (selectingCustomerName) {
         console.log(selectingCustomerName)
