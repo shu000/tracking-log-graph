@@ -1,4 +1,5 @@
 import React from 'react';
+import { visibleColor } from '../util/color';
 
 export default class TemplatesForm extends React.Component {
   render() {
@@ -85,7 +86,8 @@ export default class TemplatesForm extends React.Component {
     						type="text"
                 className="form-control"
     						defaultValue={ template.backgroundColor }
-    						style={{ backgroundColor: template.backgroundColor }}
+    						style={{ backgroundColor: template.backgroundColor,
+                         color: visibleColor(template.backgroundColor)}}
                 onChange={ e => {
                   // Should write at here because `i` is depends on here's map loop.
                   this.props.onChangeForm(i, e.target.name, e.target.value);
